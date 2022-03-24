@@ -171,3 +171,132 @@ print(f"[{st3}]")
 st= 'python string' 
 st1= st.replace('string','문자열') 
 print(st1)      #python 문자열  
+
+# split(str) 문자열을 str에 있는 문자를 기준으로 분리 ->list 저장
+st = 'python string' 
+st1= st.split() #아무것도 안넣으면 공백을 기준으로.. list
+print(st1 ) #['python', 'string'] 
+
+# split()을 이용한 입력문자 값 분리 
+values= input("입력: ").split() # 입력값=> I am a student
+print(values,type(values)) # ['I', 'am', 'a', 'student'] <class 'list'> 
+
+#예제1. 결합 및 결산 
+A= 'Have a'
+print(A) 
+B= ' Nice Day!' 
+C= A+B 
+print(C) 
+print(C*3)
+A+=' Nice Day!!!'
+print(A)
+
+#예제2
+str1= 'Python is Easy. 괜찮죠? 아니야?'
+print(str1)  
+print(str1.upper())
+print(str1.lower())
+
+# swapcase() (영문)소문자는 대문자, 대문자는 소문자 
+print(str1.swapcase())
+str2= str1.lower()
+print(str2) #python is easy.
+#title(): 영문 단어의 시작을 대문자로 변경 
+
+print(str2.title()) #Python Is Easy.
+
+#문제1 
+#1) 아래의 문장 주어진 조건에 맞게 변경
+# 'NevEr-eVer 100gIVe Up"[변경전]
+# 'Never-Ever 100Give Up"[변경전] 
+st= "NevEr-eVer 100gIVe Up"
+st1= st.title()
+print(st1)
+
+#2) Have a nice day 문자열에서 다음 알아오기 
+# 'a', 'day', 'dak' 의 갯수 알아오기  
+st= "Have a nice day"
+print('a의 개수:', st.count('a'))
+print('day의 개수:',st.count('day'))
+print('dak의 개수:',st.count('dak'))
+
+#문제2. "It is a fun python class" 문자열의 길이
+#문자 'a'의 개수, 's'의 개수를 출력하는 코드 
+st= "It is a fun python class" 
+cnt= cnt_a= cnt_s=0 
+for i in st:
+    cnt +=1 #문자열 길이 
+    if i== 'a':
+        cnt_a +=1 
+    elif i == 's': 
+        cnt_s +=1
+print("문자열의 길이:",cnt)
+print("문자열의 'a'개수:",cnt_a)
+print("문자열의 's'개수:",cnt_s)
+
+#문제3. "Have a nice day" 문자열을 가지고 다음을 처리 
+# 1) 각각 find와 index를 사용하여 "day"문자의 위치를 찾으세요
+# 2) 각각 find와 index를 사용하여 "kkk" 문자의 위치를 찾으세요 
+# 3) find를 사용하여 첫번째, 두번째, 세번째, 네번째 'a'의 위치를 출력하세요 
+st= "Have a nice day"
+print(st.find('day')) #12 
+print(st.index('day')) #12 
+#print(st.find('kkk'))  #find는 없으면 -1 
+#print(st.index('kkk')) #인덱스는 없으면 error
+
+idx= st.find('a') 
+print("find 첫번째 a의 위치값:",idx)  
+idx= st.find('a', idx+1)
+print("find 두번째 a의 위치값:",idx)  
+idx= st.find('a', idx+1)
+print("find 세번째 a의 위치값:",idx)  
+idx= st.find('a', idx+1)
+print("find 네번째 a의 위치값:",idx)  
+
+'''
+QUIZ: List 정의하여 첨자위치 저장 
+a의 총개수와 첨자의 위치를 출력하시오 
+st= 'Have a nice day Have a nice day Have a nice day'  
+(결과) 
+a 개수: 9
+첨자 : [1,5,13,17,21,29,33,37,45]
+''' 
+st= 'Have a nice day Have a nice day Have a nice day'  
+print("a개수:",st.count('a')) 
+lst= [] 
+idx=0 
+while True: 
+   idx= st.find('a',idx)
+   if lst != -1: 
+       lst.append(idx)
+       idx +=1
+   else: 
+       break
+print("첨자:",lst) 
+
+# replace() 함수 사용 
+st= "2015-06-05"
+#     0123456789 (index)
+print(st)
+print(st.replace('2015','2022'))
+print(st[0:4]) 
+print(st.replace(st[0:4],'2022')) 
+
+#split(str) : 특정문자(str)를 기준으로 문자열을 나누는 함수 
+#-> 리스트로 반환 
+st="Never Ever Give Up" 
+a = st.split()  
+print(st)
+print(a,type(a)) 
+
+st2= "하나:둘:셋"
+st3= "1,2,3" 
+b= st2.split(':')
+c= st3.split(',')
+print(b,type(b))
+print(c,type(c))
+
+st4="하나둘셋넷" 
+d= st4.split()
+print(d, type(d)) #['하나둘셋넷'] <class 'list'> 사이에 구분값이 없기 때문에 1개만  
+

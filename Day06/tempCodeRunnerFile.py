@@ -1,4 +1,4 @@
-# replace (old new) 
-st= 'python string' 
-st1= st.replace('string','문자열') 
-print(st1)      #python 문자열  
+
+st4="하나둘셋넷" 
+d= st4.split()
+print(d, type(d))
