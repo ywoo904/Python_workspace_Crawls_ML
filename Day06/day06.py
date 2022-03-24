@@ -119,3 +119,55 @@ print()
 #-rstrip(): 문자열에서 오른쪽 공백 또는 문자를 제거하여 반환  
 #-replace(old,new): 문자열에서 왼쪽(old)문자열을 찾아서 오른쪽(new)로 변경 
 #-split(): 문자열을 특정문자 기준으로 분리 -> 반환값을 리스트 
+
+print(help('str')) 
+
+#find예제 
+st= 'python string' 
+#    0123456789... 
+print(st.find('string'))#시작인덱스 7을 반환  
+# find(str,시작인덱스,끝인덱스)  
+print(st.find('t')) #2
+print(st.find('t',3)) #8 
+print(st.find('t',9)) #-1(문자열 찾지 못함)
+# find()가 문자열을 찾지 못한 경우의 반환값: -1
+
+# count() 
+st= 'python string' 
+print(st.count('t')) #2 
+# count(str,시작인덱스,끝인덱스) 
+print(st.count('t', 6))  #1
+
+# lower() 대문자를 소문자로 
+st= 'PYTHON STRING'
+print(st.lower()) #python string
+print(st)  #PYTHON STRING (변수원본을 수정하지 않음) 
+st1= st.lower() #수정본을 따로 변수로 저장해줘야함 
+print(st1)
+
+# upper() 소문자를 대문자로  
+st = 'python string' 
+print(st.upper())
+st2= st.upper() 
+print(st2)
+
+# strip (): 양쪽의 인자로 전달받은 문자열을 제거  
+# 인자값이 없는 경우에는 공백을 제거  
+st = '      python string        ' 
+print(st)
+print(f"[{st}]") 
+st1= st.strip() 
+print(st1) 
+ 
+#lstrip()
+st2=st.lstrip() 
+print(f"[{st2}]")
+
+#rstrip()
+st3=st.rstrip()
+print(f"[{st3}]")
+
+# replace (old new) 
+st= 'python string' 
+st1= st.replace('string','문자열') 
+print(st1)      #python 문자열  

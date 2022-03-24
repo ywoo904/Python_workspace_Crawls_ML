@@ -1,3 +1,4 @@
-se = {1,2,3,4,1} # 숫자의 경우에는 정렬표시됨  
-print(len(se)) #길이 카운트에 중복허용x 
-print(se) #출력에 중복허용x 
+# replace (old new) 
+st= 'python string' 
+st1= st.replace('string','문자열') 
+print(st1)      #python 문자열  
