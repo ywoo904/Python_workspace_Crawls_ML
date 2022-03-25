@@ -300,3 +300,116 @@ st4="하나둘셋넷"
 d= st4.split()
 print(d, type(d)) #['하나둘셋넷'] <class 'list'> 사이에 구분값이 없기 때문에 1개만  
 
+#splitlines(): 개행('\n')을 기준으로 문자열을 나누는 함수 <-> 리스트로 저장 
+st="Never\nEver\nGive\nUp" 
+print(st) # Never (space) Ever (space) Give (space) Up(space)
+print(st.splitlines()) #['Never', 'Ever', 'Give', 'Up'] 
+
+#여러줄 문자열처리: '''~''', """~"""
+st= """Never Ever Give Up 
+    Never Ever Give Up 
+    Never Ever Give Up 
+    Never Ever Give Up 
+    Never Ever Give Up """ 
+print(st)
+a= st.splitlines() #문장,문단을 기점으로 나눈다.  
+print(a)
+
+# join(): 지정한 문자열을 기준으로 문자열 데이터를 결합 -> str
+st='123' 
+print(st.join('%%')) # %123% 
+print('%'.join(st)) # 1%2%3
+
+#아래의 리스트를 문자열로 변경해보세요. "I am a student"
+lst= ['I','am','a','student']
+print(' '.join(lst))
+
+lst1= ["","123","456"]
+print("".join(lst1))  #123456 
+print("-".join(lst1),type("-".join(lst1))) 
+
+# st = "2015-06-05" 
+lst=['2015','06','05']
+st="-".join(lst)
+print(st) #2015-06-05 
+
+#문제1: input() 함수로 이름과 나이값을 입력받을 때 한번에 입력받아 
+# 처리하고 출력하는 코드를 작성하시오  
+# 예) 이름과 나이를 입력하세요: 홍길동 18  
+# -> 이름: 홍길동 나이: 18살 
+text= input("이름과 나이를 입력하세요") 
+name, age= text.split() 
+print(f"이름: {name} 나이: {age}") 
+
+#문제2: input() 함수로 입력받은 수의 더하기 빼기 곱하기 나누기의 
+# 간단한 수식을 처리할 수 있도록 코드를 작성하시오.   
+# 예 ) 계산식을 입력하세요 5+5  
+#       계산결과: 10 
+import os  
+while True: 
+    os.system('cls') 
+    calc= input("계산할 수식을 입력하세요 [ex)5+5]:") 
+    if '+' in calc:
+        num1,num2 = calc.split('+')
+        num1= int(num1); num2= int(num2) 
+        print("계산결과는: ",num1+num2)
+    elif '-' in calc:
+        num1,num2 = calc.split('-')
+        num1= int(num1); num2= int(num2) 
+        print("계산결과는:",num1-num2)
+    elif '*' in calc:
+        num1,num2 = calc.split('*')
+        num1= int(num1); num2= int(num2) 
+        print("계산결과는: ",num1*num2)
+    elif '/' in calc:
+        num1,num2 = calc.split('/')
+        num1= int(num1); num2= int(num2) 
+        print("계산결과는: ",num1/num2)
+    else: 
+        print("수식입력이 잘못됏습니다.\n다시 입력해주세요.")
+    sel= input("계속하시겠습니까?(Y/N)") 
+    if sel=='n': 
+        break 
+print("계산기 프로그램을 종료합니다.")
+
+###알고리즘 
+# 알고리즘이란 어떤 문제를 해결하기 위한 일련의 절차를 의미. 프로그래밍이 
+# 논리적인 절차를 의미하는 로직을 기초로 삼고 있기 떄문에 이를 통해서 문제를 해결하는 것을 말함 
+
+# 알고리즘의 조건 
+# -입력: 외부에서 제공되는 자료가 있을 수 있다 
+# -출력: 적어도 한가지 이상의 결과가 나올 수 있다. 
+# -명백성: 각 명령들은 애매한 부분이 없이 간단 명령해야한다. 
+# -유한성: 반드시 종료 조건이 있어야 한다. 
+# -효과성: 모든 명령들은 명백하고 실행 가능한 것이어야 한다. 
+
+# 최대값/최소값 (max/min)
+# :전체 자료의 원소들 중에 큰 값과 가장 작은 값을 선별하는 기본 알고리즘 
+
+# 1. 입력자료생성: 
+import random 
+dataset= [] 
+for i in range(10): 
+    r= random.randint(1,100) 
+    dataset.append(r)
+print(dataset)
+
+# 변수초기화 
+vmax= vmin= dataset[0]
+
+# 최대최소값 구하기 
+for i in dataset:
+    if vmax < i: 
+        vmax= i
+    if vmin > i: 
+        vmin=i 
+
+#결과출력: 
+print("max=",vmax,"min=",vmin) 
+
+##정렬(sort)
+dataset= [3,5,1,2,4]
+
+# 2장 4번과 3,4장의 연습문제 풀어서 다음주 월요일까지 메일로 보내기 
+# kdw335552@nate.com 
+
