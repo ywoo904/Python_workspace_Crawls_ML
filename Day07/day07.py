@@ -254,7 +254,7 @@ def pr7(par1=10, par2): #SyntaxError: non-default argument follows default argum
     print (par1,par2)   #기본값 뒤에는 일반 인자가 존재하면 안됨. Default값은 무조건 뒤로 뺴라 
 pr7()
 
-#[ QUIZ]  
+#[QUIZ]  
 #1. 짝, 홀수를 구분하는 함수를 작성하세요 
 def evenodd(num):
     if num %2==0: 
@@ -269,10 +269,11 @@ print(result)
 #2. "3의 배수를 판별하는 함수를 작성해주세요" 
 
 def threepower(num):
-    if num %3==0:
+    if not num %3:
         return f"{num}은 3의 배수입니다."
     else: 
         return f"{num}은 3의 배수가 아닙니다."
+    
 txt= int(input("숫자를 입력하세요"))
 result= threepower(txt)
 print(result)
@@ -281,36 +282,33 @@ print(result)
 #3: 계산기를 입력,출력,연산기능으로 나눠서 실행되게 작성해주세요
 # 입력 => 계산처리 => 출력
 
-def cal(txt): 
-    if '+' in txt: 
-        num1,num2=txt.split('+')
-        num1=int(num1); num2= int(num2);
-        result= num1+num2 
-    if '-' in txt: 
-        num1,num2=txt.split('-')
-        num1=int(num1); num2= int(num2);
-        result= num1+num2 
-    if '*' in txt: 
-        num1,num2=txt.split('*')
-        num1=int(num1); num2= int(num2);
-        result= num1*num2 
-    if '/' in txt: 
-        num1,num2=txt.split('/')
-        num1=int(num1); num2= int(num2);
-        result= num1/num2 
-    return result
+def cal(num1,num2,giho): 
+    if giho =='+':  
+        return num1+num2
+    elif giho =='-':  
+        return num1-num2
+    elif giho =='*':  
+        return num1*num2
+    elif giho =='/':  
+        return num1/num2
+    
+def output(num1,num2,giho,result): 
+    print(num1,giho,num2,"=",result)
 
-txt=input("입력: 계산할 수식을 입력하세요.")
-result= cal(txt) 
-print("출력: ",result)
+def Input():
+    num1,giho,num2= int(input("첫번째 정수입력: ")) \
+    ,input("계산기호입력(+-*/):"),int(input("두번째 정수입력:"))
+    result= cal(num1,num2,giho) 
+    output(num1,num2,giho,result)
+
+#메인: 
+Input()     
+    
 
 #4. 예제 거꾸로 수를 반환하는 함수를 계산, 출력기능으로 나눠서 작성해주세요.  
 def backwards(num): 
     list= [] 
-    for i in range(len(str(num))): #i= 0,1,2,3 # 1234->4321 
-       #3뽑기 1234%100= 34 34//10= 3
-       #2뽑기 1234%1000= 234 234//100=2 
-       #1뽑기 1234//1000
+    for i in range(len(str(num))): 
         if i ==0:
           list.append(num%10)
         elif i>0 and i < len(str(num))-1:
@@ -322,3 +320,177 @@ def backwards(num):
 txt=int(input("거꾸로 출력할 숫자를 입력하세요"))
 result=backwards(txt) 
 print(result)
+#위는 내가한거 
+
+def reverseCode(result): 
+    tmp, su= 0,0
+    while True: 
+        tmp= result%10 
+        result= result//10 
+        su= (su+tmp)*10 
+        if not result: 
+            return su//10 
+
+def display(): 
+    result, su=0,0
+    result=int(input("정수입력:")) 
+    su= reverseCode(result) 
+    print("변환전값:{}, 변환후값:{}".format(result,su)) 
+    
+#메인 
+display() 
+
+#예제: 친구이름 관리를 함수로 기능을 나눠서 작성해주세요 
+# 1. 친구목록보기 
+# 2. 친구추가 
+# 3. 친구삭제 
+# 4. 친구수정 
+# 0. 종료  
+def fr_list(lst): #친구목록보기
+    print("="*15,"친구목록보기","="*15)
+    if lst !=[]:
+        for i in range(len(lst)):
+            print(f"{i}:{lst[i]}")
+    else:
+        print("등록된 친구가 없습니다.")
+def fr_add(lst): #친구추가 
+    name=input("등록할 이름입력:")
+    lst.append(name)
+    
+def fr_del(lst): #친구삭제
+    name=input("삭제할 이름입력:")
+    if name in lst:
+        lst.remove(name)
+    else: 
+        print("삭제할 친구가 없습니다.")
+def fr_mod(lst): #목록수정
+    name = input("수정할 친구이름 입력")
+    if name in lst: 
+        idx=lst.index(name)
+    else: 
+        print("수정할 친구가 없습니다.")
+        return 
+    name_mod= input("변경이름 입력하세요:")
+    lst[idx]= name_mod
+
+#main 
+import os
+lst=[]
+while True:
+    print("="*15,"친구관리 프로그램","="*15) 
+    print("1.친구목록보기")
+    print("2.친구추가")
+    print("3.친구삭제") 
+    print("4.친구수정")
+    print("0.종료")
+    sel=input("메뉴를 선택하세요 [0-4] ") 
+    if sel== '1': 
+        fr_list(lst)
+        os.system('pause')
+    elif sel=='2':
+        fr_add(lst) 
+        os.system('pause')
+    elif sel=='3':
+        fr_del(lst)
+        os.system('pause')
+    elif sel=='4': 
+        fr_mod(lst)
+        os.system('pause')
+    elif sel=='0':
+        print("프로그램을 종료합니다.")
+        break
+    else:
+        print("메뉴선택이 잘못됬습니다.")
+        os.system('pause')
+        
+#문제) 알바시급 프로그램 작성 (default 인자값 사용) 
+# 시급: 8500원 하루 8시간 한달 30일 (기본값) 
+# 다음과 같이 출력되게 
+# <<시급계산 프로그램>> 
+# 1. 기본급
+# 2. 일한 날짜 입력 
+# 번호입력 >> 
+
+
+#function
+def alba(day=30):
+    time=8; price=8500
+    re=time*price*day
+    return re 
+#main
+def display(): 
+    print("<<시급계산프로그램>>")
+    print("1.기본급")
+    print("2.일한 날짜입력")
+    sel=int(input("번호입력>>"))
+    if sel==1: 
+        result= alba()
+    elif sel==2: 
+        day= int(input("일한 일 수 입력:"))
+        result= alba(day)
+    print("당신의 급여는{:,}원 입니다.".format(result))
+display() 
+
+#인자값 처리방식1 => 연속된 자료를 처리하는 함수의 인자처리방식
+
+#예제: 
+def pr8(a,b,c):
+    print(a,b,c)
+    
+#메인: 
+pr8(10,20,30) # 10 20 30 
+
+# "*"를 이용하여 리스트 또는 튜플과 같은 자료를 연속된 인자값으로 처리 
+# 리스트 또는 튜플의 변수값을 받아서 unpacking방식으로 인자를 전달 
+x=[100,200,300]
+y= [10,20]
+z= 1,2,3,4 
+pr8(*x) # 100 200 300 
+pr8(*y,30) # 10 20 30 
+pr8(*z) # TypeError 
+
+# *를 이용하여 연속된 자료(리스트,튜플)에 데이터를 인자로 전달이 가능하나 인자의 개수와 전달되는 
+# 자료의 개수는 같아야 한다. 
+
+#인자값 처리방식 2= > 가변인자값 처리 ... 
+# 고정인자 => 인자값을 반드시 정해진 값으로 1:1로 인자를 전해야하는 인자(일반) 
+# 가변인자 => 인자값을 정해진 개수로 전달하지 않고, 가변적으로 전달가능한 인자 
+# 가변인자 설정은 함수 정의시에 매개변수(인자)앞에 "*"를 사용한다. 
+
+#전달된 인자값들의 합을 구하는 예제: 
+def sum_func(*par): 
+    result= 0 
+    print(par,type(par)) #전달된 인자값 처리 방식 
+    for su in par: 
+        result+=su
+    return result
+def display():
+    sum=0
+    sum=sum_func()
+    print(sum)
+    sum= sum_func(10,20,30)
+    print("인자가 세개(10,20,30)인 경우 결과:",sum)
+    sum= sum_func(10,20,30,40,50) 
+    print("인자가 다섯개(10,20,30,40,50)인 경우 결과",sum) 
+    
+display() 
+
+# 주의) 인자값 처리함에 있어 고정인자와 가변인자를 동시에 사용하는 경우, 
+# 고정인자를 먼저 처리하도록 한다. 즉 가변인자는 마지막에 사용되게 해야한다. 
+# 예제) 딕셔너리 자료형을 받아서 처리하는 함수 
+def dic_func(**par): 
+    print(par,type(par)) 
+    for k in par: 
+        print("{}:{}".format(k,par[k]))
+#메인
+dic_func(피카츄='1마리',파이리='2마리',꼬부기='없음',라이칸='1') 
+
+dic= { 
+      'sep': '-',
+      'end': '\n\ntest'
+} 
+lst=['test1','test2','test3','test4'] 
+
+print('test','test','test',**dic) #test-test-test
+print('test','test','test',sep='-',end='\n\ntest') #testtest-test-test
+print(*lst,**dic) # testtest1-test2-test3-test4
