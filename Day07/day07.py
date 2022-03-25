@@ -205,3 +205,120 @@ while True:
     if sel== 'n':
         break
 print ("프로그램 종료")
+
+
+## 함수 인자 기본값(default) 설정 
+# default란? 입력 인자값이 없는 경우에 기본적으로 적용되어지는 값을 의미함. 
+
+# 형식) 
+# def 함수이름(param1,param2=1): 
+#       함수정의문1 
+#       함수정의문2
+#  이렇게 정의된 함수가 있는 경우,param2는 기본값으로 '1'을 가지고 있는 것임. 
+# 즉, 인자값으로 param2에 전달되지 않아도 기본값으로 '1'을 가진다. 
+
+# 예제4] 함수 인자의 기본값 설정(인자1) 
+def pr4(par1=10): 
+    print(par1)
+    
+#메인 
+pr4(10) #10 덮어쓴다 
+pr4(20) #20 덮어쓴다 
+pr4(3) #3 덮어쓴다 
+pr4() #10 기본값인 10을 사용 
+
+# 인자를 2개 가진 경우(모두 default인자인 경우)
+def pr5(par1=10, par2=20): 
+    print(par1,par2)  
+    
+# 메인 
+pr5(100,200) #100 200 
+pr5(100)  #100 20
+pr5(200)  #200 20
+pr5(par2=200) #10 200 
+pr5()     #10 20 
+
+# 인자가 2개 이상, 기본값이 1개인 경우 
+def pr6(par1,par2=20): 
+    print(par1,par2)
+    
+# 메인 
+pr6(100,200) #100 200 
+pr6(100)  #100 20
+pr6(200)  #200 20
+# pr()    # TypeError: pr6() missing 1 required positional argument: 'par1'
+#인자는 반드시 전달되어야 한다. 
+
+# 인자의 기본값이 맨 앞에 있는 경우...
+def pr7(par1=10, par2): #SyntaxError: non-default argument follows default argument
+    print (par1,par2)   #기본값 뒤에는 일반 인자가 존재하면 안됨. Default값은 무조건 뒤로 뺴라 
+pr7()
+
+#[ QUIZ]  
+#1. 짝, 홀수를 구분하는 함수를 작성하세요 
+def evenodd(num):
+    if num %2==0: 
+        return f"{num}은 짝수입니다." 
+    else: 
+        return f"{num}은 홀수입니다"
+
+txt=int(input("숫자를 입력하세요:"))
+result= evenodd(txt) 
+print(result)
+
+#2. "3의 배수를 판별하는 함수를 작성해주세요" 
+
+def threepower(num):
+    if num %3==0:
+        return f"{num}은 3의 배수입니다."
+    else: 
+        return f"{num}은 3의 배수가 아닙니다."
+txt= int(input("숫자를 입력하세요"))
+result= threepower(txt)
+print(result)
+
+
+#3: 계산기를 입력,출력,연산기능으로 나눠서 실행되게 작성해주세요
+# 입력 => 계산처리 => 출력
+
+def cal(txt): 
+    if '+' in txt: 
+        num1,num2=txt.split('+')
+        num1=int(num1); num2= int(num2);
+        result= num1+num2 
+    if '-' in txt: 
+        num1,num2=txt.split('-')
+        num1=int(num1); num2= int(num2);
+        result= num1+num2 
+    if '*' in txt: 
+        num1,num2=txt.split('*')
+        num1=int(num1); num2= int(num2);
+        result= num1*num2 
+    if '/' in txt: 
+        num1,num2=txt.split('/')
+        num1=int(num1); num2= int(num2);
+        result= num1/num2 
+    return result
+
+txt=input("입력: 계산할 수식을 입력하세요.")
+result= cal(txt) 
+print("출력: ",result)
+
+#4. 예제 거꾸로 수를 반환하는 함수를 계산, 출력기능으로 나눠서 작성해주세요.  
+def backwards(num): 
+    list= [] 
+    for i in range(len(str(num))): #i= 0,1,2,3 # 1234->4321 
+       #3뽑기 1234%100= 34 34//10= 3
+       #2뽑기 1234%1000= 234 234//100=2 
+       #1뽑기 1234//1000
+        if i ==0:
+          list.append(num%10)
+        elif i>0 and i < len(str(num))-1:
+          list.append(num%10**(i+1)//10**i)
+        elif i== len(str(num))-1: 
+          list.append(num//10**i) 
+    return list
+
+txt=int(input("거꾸로 출력할 숫자를 입력하세요"))
+result=backwards(txt) 
+print(result)
