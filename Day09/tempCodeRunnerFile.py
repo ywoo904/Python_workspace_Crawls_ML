@@ -1,14 +1,14 @@
-
-import datetime,time
-t= time.localtime()  
-s= time.localtime().tm_zone  
-print(t) #time.struct_time(tm_year=2022, tm_mon=3, tm_mday=28, tm_hour=21, tm_min=46, tm_sec=59, tm_wday=0, tm_yday=87, tm_isdst=1)
-print(s) #EDT 
-print(t.tm_year) #2022
-print(t.tm_mday) #28 
-
-start = time.time()  
-print(start) #1970.01.01.00시를 기점으로 'How many seconds?' 
-time.sleep(5)
-end = time.time() 
-print(end)
+try: 
+    num= int(input("나이입력:")) 
+    
+    if num<0:
+        raise Exception("예외사항")
+    
+except ValueError:
+    print("양의정수만 입력하세요!") 
+except Exception as e: 
+    print(e,"0보다 작은 나이는 존재하지 않습니다.")
+else: 
+    print("입력값출력{}- 예외처리 안된경우 실행".format(num)) 
+finally:
+    print("프로그램을 종료합니다.")
