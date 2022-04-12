@@ -29,14 +29,51 @@ x[2]
 
 ## 데이터 타입 
 # numeric: 숫자(10.5,55,768)
+# integer: integer 타입(숫자 L을 붙여서 표현)(1L,55L,100L) 
+# complex: 복소수형(i를 붙여서 구분)
+# character: 문자/문자열 자료
+# logical: 논리형자료(TRUE/FALSE)
 
+# 타입확인 함수: class() 
+class(10L) #integer 
+class(10) #numeric 
+class("th") #chracter
+class('test') #character 
+class(TRUE) #logical 
 
+# 형변환: as.numeric(), as.integer(), as.complex() 
+x <- 1L
+y <- 2
 
+a <- as.numeric(x)
+class(a) #numeric 
 
+b <- as.integer(y) 
+class(b) #integer
 
+##연산자(산술) 
+# +,-,*,., ^ (제곱), %%(나머지),%%(정수나누기)
+a+b
+a-b
+a*b
+a/b 
+a^b 
+a%%b
+a%/%b  
 
+## <-, <<-, ->, ->> 
+# "<<-" 전역선언, <- 대입처리 
 
+## 비교연산자  
+# ==,!=, >, <, >=, <= 
 
+## 논리연산자
+# &,&&,|,||,! 
 
+##이외 연산자 
+# : 순서대로 순자를 생성하는 연산자 ex) 1:10 -> X 
+# x는 (1,2,3,4,5,6,7,8,9,10)
+# %in%: 데이터들(백터) 내에 값이 있는지 확인 
+# %*%: 메트릭 곱하게 
 
-
+# **print(), paste
