@@ -247,8 +247,98 @@ numbers[9]
 numbers3 <- 1.5:6.5  # [1] 1.5 2.5 3.5 4.5 5.5 6.5
 numbers3 # 숫자를 무엇으로 사용하던 값의 증분은 정수 1씩 
 
-#
+# 연속된 값의 숫자 벡터경우 단위 증가 시 사용되지 않는 경우   
 numbers4 <- 1.5:6.4 # [1] 1.5 2.5 3.5 4.5 5.5
 numbers4 # 마지막 6.5는 출력이 되지 않는다.  
 
+# 논리값 벡터 
+log_values= c(TRUE,FALSE,TRUE,FALSE) 
+log_values 
 
+# 벡터 길이 알아오기(요소 갯수 알아오기) 
+length(numbers4) # 벡터의 요소갯수: 5  
+
+# 벡터의 문자열이나 숫자열을 정렬하여 처리하는 함수: sort() 
+fruits <- c("banana","apple","orange","mango","lemon") #abc 
+numbers <- c(13,3,5,7,20,2) #1-100 
+
+sort(fruits)
+sort(numbers)
+ 
+# 벡터함수의 사용-> 인덱스 참조1 : c() 
+fruits <- c("banana","apple","orange","mango","lemon") 
+# 선택참조 
+fruits[c(1,3,5)] 
+
+# 인덱스 참조2
+fruits <- c("banana","apple","orange","mango","lemon")  
+# 선택제거 (-인덱스로 제거하여 출력 )
+fruits[-1]  
+fruits[-3] 
+fruits[c(-1,-3)]
+
+# 벡터의 반복: rep() 
+# 요소의 반복
+repeat_each <- rep(c(1,2,3), each=3)  #요소의 반복 
+repeat_each # [1] 1 1 1 2 2 2 3 3 3
+
+# 백터의 반복
+repeat_times <- rep(c(1,2,3), times=3 ) #벡터를 반복 
+repeat_times # [1] 1 2 3 1 2 3 1 2 3
+
+# 요소의 개별반복
+repeat_ind <- rep(c(1,2,3),times=c(5,3,2) )
+repeat_ind #  [1] 1 1 1 1 1 2 2 2 3 3 
+
+# 순차적인 벡터생성 
+# 1
+number1 <- 1:10
+number1
+
+# 2 seq() 함수사용 : 인자(from=(시작), to=(끝), by=(간격)) 
+numbers2 <- seq(from=0, to=100, by= 20 )
+numbers2 # [1]   0  20  40  60  80 100 
+
+for (i in seq(from=0, to=100, by= 20 )) { 
+    print(i)
+}
+
+## List: list() 함수사용, list라는 목록형 자료를 사용 (파이썬의 리스트와 비슷) 
+#  문자열 리스트: 
+strlist <- list('사과','바나나','체리')
+strlist 
+
+# 숫자형 리스트 
+numlist <- list(10,20,30,40) 
+numlist 
+
+
+tlist <- list('사과',c(10,20,30),'바나나', '체리') 
+tlist[2]
+
+#[[1]]
+#[1] 10 20 30 
+
+# 리스트내 값 참조 
+strlist <- list('사과','바나나','체리')
+"사과" %in% strlist # TRUE 
+
+# 리스트내 값 추가ㅣ: append() 
+strlist <- list('사과','바나나','체리') 
+#strlist <- append(strlist, "메론", after= 2)
+strlist <- append(strlist, "포도") # after 가 없다면? 마지막에 추가 
+strlist
+
+# 리스트값 제거: 
+#strlist <- strlist[-1] 
+#strlist 
+
+# 리스트 범위로 값을 출력 
+strlist[2:5] 
+(strlist)[2:5] 
+
+# 리스트 결합 
+list1 <- list("a", "b", "c")
+list2 <- list( 1,2,3)
+list3 <- c(list1,list2)
+print(list3) 
