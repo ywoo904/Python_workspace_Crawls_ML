@@ -342,3 +342,249 @@ list1 <- list("a", "b", "c")
 list2 <- list( 1,2,3)
 list3 <- c(list1,list2)
 print(list3) 
+
+# Matrices(행렬)- matrix()를 사용, nrow,ncol 값으로 정렬지정  
+## 행렬생성1
+tmatrix <- matrix(c(1,2,3,4,5,6),nrow=3, ncol= 2)   
+tmatrix  
+
+## 행렬생성2 
+t2matrix <- matrix(c("apple","banana","cherry","orange"),nrow=2,ncol=2) 
+t2matrix
+
+## 행렬에 대한 접근 "[]"를 이용하여 접근 
+t2matrix[1,2] 
+t2matrix[2,] 
+t2matrix[,2 ] 
+ 
+# 하나 이상의 행렬에 접근
+t3matrix <- matrix(c("apple","banana","cherry","orange","grape","pineapple","pear","melon","fig"),nrow=3,ncol=3) 
+t3matrix 
+t3matrix[c(1,2),] 
+t3matrix[-3,] 
+t3matrix[ ,c(1,3)]
+t3matrix[,-2]
+
+# 행렬에 값을 추가(컬럼추가): cbind()
+newmatrix <- cbind(t3matrix,c("strawberry","blueberry","raspberry")) 
+newmatrix 
+
+# 행렬에 값을 추가(로우추가): rbind() 
+newmatrix <- rbind(t3matrix,c("strawberry","blueberry","raspberry")) 
+newmatrix 
+
+# 행렬값 제거: 음수 인덱스 표시  
+r1matrix <- newmatrix[-c(1,2),-c(3,4)] 
+r1matrix
+
+# 행렬값 확인 
+"apple" %in% r1matrix  #False 
+"apple" %in% newmatrix #True
+
+# 행렬에 row와 column 알아오기 : dim() 함수 
+dim(t2matrix)  
+dim(t3matrix) 
+dim(tmatrix)
+dim(newmatrix)
+
+# 행렬의 길이 
+lmatrix <- matrix(c("apple","bananana","cherry","orange"), nrow= 2, ncol= 2)
+length(lmatrix) 
+lmatrix
+
+#행렬에 반복문을 사용하여 row 와 column 값으로 행렬을 붙여와 보세요 
+
+t4matrix <- matrix(c("apple","bananana","cherry","orange"), nrow= 2, ncol= 2) 
+
+for(rows in 1:nrow(t4matrix)) { 
+    for(columns in 1:ncol(t4matrix)){ 
+        print(t4matrix[rows,columns])
+    }
+    } 
+
+#행렬 합치기 
+Matrix1 <- matrix(c("apple","banana","cherry","grape"), nrow=2, ncol=2) 
+Matrix2 <- matrix(c("orange","mango","pineapple","watermelon"), nrow=2 , ncol=2) 
+
+#row 로 더하기 : rbind() 
+matrix_combined <- rbind(Matrix1, Matrix2 )
+matrix_combined
+
+#column 로 더하기 : cbind() 
+matrix_combined <- cbind(Matrix1, Matrix2 )
+matrix_combined
+
+## Arrays 배열 
+tarray <- c(1:24) 
+tarray  #  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+class(tarray) # "integer" 
+
+multiarray <- array(tarray, dim= c(4,3,3))
+multiarray
+# *dim(4,3,3): 4는 rows, 3dms columns, 3은 행렬의 갯수(생성할 행렬의) 
+# dim(nrow, ncol, 생성갯수)
+
+# Arrays 값 접근 
+multiarray[2,2,2] #18  #Array[row, col, 메트릭 번호] 
+
+# c() 함수를 이용한 접근 
+t2array <- c(1:24) 
+
+## 첫번째 행렬의 첫번째 row에 접근 
+tmultiarray <- array(t2array, dim =c(4,3,2))
+tmultiarray[,c(1),1]
+
+## 존재여부 
+3 %in% tmultiarray
+
+## row와 column 확인 
+dim(tmultiarray) 
+
+## Array 길이 
+length(tmultiarray) 
+
+# 반복문 사용  
+for (x in multiarray) {
+    print(x)
+
+ } 
+
+ ## Data Frames (data.frame()) 
+ # 데이터프레임은 데이터를 테이블 형태로 표현하는 자료형 입니다. 
+ # 데이터프레임 안의 데이터 타입은 서로 달라도 됩니다. 
+ 
+ # 첫번째 칼럼은 문자(character), 두번째는 numeric, 세번째는 logical 로 생성해봅니다. 
+ Data_Frame <- data.frame( 
+     Training = c("Strength","Stamina","Other"), 
+     Pulse= c(100,150,120), 
+     Duration= c(60,30,45)
+ )
+
+ Data_Frame
+
+ # summary() : 데이터프레임 값을 요약해서 보여줍니다  
+ summary(Data_Frame) # 데이터프레임의 값을 요약해서 출력
+
+Data_Frame[1] 
+Data_Frame['Training'] 
+Data_Frame$Training 
+
+# Row 추가: rbind() 
+ Data_Frame <- data.frame( 
+     Training = c("Strength","Stamina","Other"), 
+     Pulse= c(100,150,120), 
+     Duration= c(60,30,45)
+ )
+
+New_Row_DF <- rbind(Data_Frame,c("Speed",110,110))
+New_Row_DF
+
+## Column 추가: cbind() 
+ Data_Frame <- data.frame( 
+     Training = c("Strength","Stamina","Other"), 
+     Pulse= c(100,150,120), 
+     Duration= c(60,30,45)
+ )
+
+New_Col_DF <- cbind(Data_Frame,Steps=c(1000,6000,2000)) 
+New_Col_DF
+
+## row와 column 제거 
+Data_Frame_New <- Data_Frame[-c(1),-c(1)] 
+Data_Frame_New
+
+## ncol(), nrow () 
+ncol(Data_Frame) #3 
+nrow(Data_Frame) #3
+
+## 요소갯수(길이) 
+length(Data_Frame) #3 Training, Pulse, Duration 으로 시리즈가 3개이다 
+
+# 결합: rbind()  
+ Data_Frame1 <- data.frame( 
+     Training = c("Strength","Stamina","Other"), 
+     Pulse= c(100,150,120), 
+     Duration= c(60,30,45) )
+
+ Data_Frame2 <- data.frame( 
+     Training = c("Strength","Stamina","Other"), 
+     Pulse= c(100,150,120), 
+     Duration= c(60,30,45) )
+
+ New_Data_Frame <- rbind(Data_Frame1, Data_Frame2)
+ New_Data_Frame
+
+
+# 결합: cbind()  
+ Data_Frame3 <- data.frame( 
+     Training = c("Strength","Stamina","Other"), 
+     Pulse= c(100,150,120), 
+     Duration= c(60,30,45) 
+     )
+
+ Data_Frame4 <- data.frame( 
+     Steps= c(3000,6000,2000),
+     Calories = c(300,400, 300)
+
+ New_Data_Frame1 <- cbind(Data_Frame3, Data_Frame4)
+ New_Data_Frame1
+
+ ## Factors (factors()): 범주형 자료일때 사용 
+ # :정해진 범위 내에서 카테고리별로 분석을 하기 위해서 사용되는 데이터 자료형 
+ # 예) 성별: 남성/여성, 음악: 록, 팝, 클래식, 재즈, 운동: 스테미나, 근력 
+ 
+ # factor 생성 
+ music_genre <- factor(c('Jazz','Rock','Classic','Pop','Jazz','Rock','Jazz'), levels= c('Classic','Jazz','Pop','Rock','Opera')) 
+ music_genre #Levels: Classic Jazz Pop Rock 중복된 목록은 중복제거해서 정리 
+ levels(music_genre) #[1] "Classic" "Jazz"    "Pop"     "Rock"   
+ length(music_genre) # [1] 7 
+
+ # levels: levels() -> 카테고리로 출력 
+ length(music_genre)
+ 
+ # 요소접근 
+ music_genre[3] #Classic / Levels: Classic Jazz Pop Rock 
+ 
+ # 요소의 변경  
+ music_genre[3] <- 'Pop' 
+ music_genre[3] #[1] Pop / Levels: Classic Jazz Pop Rock 
+
+ # 주의) factor는 정해진 범주 내에서 카테고리별로 분석을 위해서 사용하기 때문에 
+ # 사전에 정의되어있지 않은 값으로 변경 시 에러가 발생함  
+ music_genre[3] <- 'Opera' #유효하지 않은 팩터로 수정을 명령하여 에러발생 
+
+ ## 순열과 조합 
+ # 순열: 서로 다른 것들이 있는 경우 그 중에서 몇개를 뽑아서 줄을 세우는 경우의 수
+ # 여기서 줄을 세운다는 표현은 순서를 고려하는 의미 
+ # 먼저 실행결과에 따라 그 뒤가 영향을 받는 것  
+ # nPr- n번중 순서를 따지고 r번실행 
+ # nCr- n번중 순서를 따지지 않고 r번 실행 
+
+# 팩토리얼 구하는 코드 
+fact <- function(n) {  
+    x <-1 
+    for (i in 2:n) {
+        x<-x*i 
+    } 
+    return (x)
+}
+fact(10) 
+######################################
+x <- c(1,2,3,4,5)
+count <- 0
+for (i in 1:5) { 
+    x2 <- x[x !=i] # i 에 저장된 값 빼고 x2 저장 
+    for (j in 1:4) { 
+        print(c(i,x2[j])) 
+        count <- count + 1 
+    }
+}
+# (1,2) (1,3) (1,4) (1,5) (2,1) (2,3) (2,4) (2,5)... 
+print(count) #20 
+
+# => 공식을 이용한 경우 nPr = n!/(n-r)! 
+perm <- function(n,r) { 
+    return(fact(n)/fact(n-r))
+} 
+perm(5,4) #60 
+
