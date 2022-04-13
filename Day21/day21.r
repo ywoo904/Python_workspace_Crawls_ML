@@ -35,27 +35,14 @@ x[2]
 # logical: 논리형자료(TRUE/FALSE)
 
 # 타입확인 함수: class() 
-class(10L) #integer 
-class(10) #numeric 
-class("th") #chracter
-class('test') #character 
-class(TRUE) #logical 
+#class(10L) #integer 
+#class(10) #numeric 
+#class("th") #chracter
+#class('test') #character 
+#class(TRUE) #logical 
 
-# 형변환: as.numeric(), as.integer(), as.complex() 
-x <- 1L
-y <- 2
+# r
 
-a <- as.numeric(x)
-class(a) #numeric 
-
-b <- as.integer(y) 
-class(b) #integer
-
-##연산자(산술) 
-# +,-,*,., ^ (제곱), %%(나머지),%%(정수나누기)
-a+b
-a-b
-a*b
 a/b 
 a^b 
 a%%b
@@ -70,10 +57,38 @@ a%/%b
 ## 논리연산자
 # &,&&,|,||,! 
 
+10==10 && 10==10 
+!(10==10)
+
 ##이외 연산자 
 # : 순서대로 순자를 생성하는 연산자 ex) 1:10 -> X 
 # x는 (1,2,3,4,5,6,7,8,9,10)
 # %in%: 데이터들(백터) 내에 값이 있는지 확인 
 # %*%: 메트릭 곱하게 
 
-# **print(), paste
+1:10 -> x 
+x <-5
+i %in% x
+
+# **print(), paste 
+print(x) 
+paste(x,i)
+print('I','am','a','student')
+
+# **print(), paste 
+print(x) 
+paste(x,i)
+print("I","am","a","student") # error  
+print('I','am','a','student')
+
+# 내장함수 
+# max(), min(), sqrt ()- 루트연산 abs() 절대값 ㄷ 
+# ceiling()- 올림, floor()-내림 ->ceiling(1.4), floor(1.4)
+
+max(c(11,5,36,3,4,8,33)) 
+min(c(11,5,36,3,4,8,33)) 
+sqrt(2)
+abs(-100)
+ceiling(1.4) 
+floor(1.4)
+round(1.456,2) 
