@@ -76,7 +76,7 @@
 # 이항시행에서는 여러번 할 수 있다는 점입니다. 
 
 # rbinom() 함수
-# rbinom(난수의 갯수(시행횟수), 값의 크기, 성공확률) 
+# rbinom(난수의 갯수, 시행횟수, 성공확률) 
 # 난수의 갯수: 난수의 갯수를 의미로 앞에 설명한 벡터에 저장된다. 
 # 성공확률은 0과 1사이의 숫자를 사용 
 
@@ -138,8 +138,141 @@ for (i in 1:n_simulation) {
 # x,y 축 중심으로 2차원 좌표평면 생각. 가로 세로 축 길이 1인 정사각형 
 # 정사각형의 원점을 중심으로 한 반지름이 1인 원을 그리면,
 # 온전한 원이 아닌 원의 1/4인 사분원이 된다. 
-# 가로세로 길이 1인 정사각형에 매우 작은 입자 뿌린다고 생각 
+# 가로세로 길이 1인 정사각형에 매우 작은 입자 뿌린다고 생각  
+# 이 입자는 무작위로 뿌린다는 것을 의미, 안쪽에 뿌려진 입자의 비율과 정사각형의 넓이에서 4분윈이 차지하는 넓이의 비율이라고 추측할 수 있음
+# 이 경우 오차가 생길 수 있으나, 입자를 충분히 많이 촘촘히 뿌린다면 통계적 확률은 수학적 확률에 가깝게 된다.  
+# 여기에 원 넓이를 구하는 식을 도입, p * r ^ 2, 4분원이기 떄문에 1/4로 계산
+# 결국 반지름 1이기 때문에 p/4, 즉 입자가 사분원 안에 떨어질 비율은 p/4에 가깝게 된다. 구해진 값에 4를 곱하면 파이 즉 원주율을 구할 수 있다. 
+
 
 
 # 4분원의 넓이: 1/4 * 파이 * r^2 when r=1, 1/4 *p = 4분원의 넓이 = p/4 
 # p(Pie)= 4분원의 넓이 * 4
+
+
+## R에서 이런 동작을 하는 runif(1) (0에서 1사이의 값을 return) 
+# 이것을 좌표 x,y 에 대입하면 입자를 무작위로 뿌리는 것과 같은 효과를 가져올 수 있다. 
+n_sim <- 1000
+x<- vector(length= n_sim )
+y<- vector(length= n_sim ) 
+res <- 0
+
+for (i in 1: n_sim) {
+    x[i] <- runif(1)
+    y[i] <- runif(1)
+
+    if (x[i]^2 +y[i]^2 <1) res<- res + 1
+}  
+print(res)
+print(4* res /n_sim)
+
+# 그림로 표현하기 
+circle <- function(x) sqrt(1 - x^2)
+plot(x,y,xlab= "X", ylab= "Y") 
+curve(circle, from=0, to=1, add=T, col="blue", lwd=2)
+
+# 몬티홀 문제 
+# 결론: 바꿨을때 확률이 다르고 바꾸는게 낫다  
+
+# 바꾸지 않고 처음 문을 고른 경우
+n_simul <- 1000
+doors <- 3  
+success <- 0 
+
+for (i in 1:n_simul) { #1000번 반복 
+    # 3개의 문 중 차의 위치를 선택
+    car <- sample(doors,1)
+    
+    # 차가 없는 곳에 염소들을 배치 
+    if (car == 1) { 
+        goat <- c(2,3)
+    } else if (car==2) {
+        goat <- c(1,3)
+    } else { 
+        goat <- c(1,2) 
+    } 
+
+    # 참가자가 문을 선택 (고른다) 
+    pick <- sample(doors,1)
+
+    # 참가자가 고르지 않은 문 중 염소가 있는 문을 찾는다.
+    goat_not_picked <- goat[goat !=pick] 
+    
+    # 참가자가 고르지 않은 문 중 염소가 있는 문 하나를 열어준다 
+    if (length(goat_not_picked)>1) { 
+        open <- sample(goat_not_picked, 1) 
+        
+    } else {  
+        open <- goat_not_picked 
+    } 
+
+    # 바꾸지 않고 처음 고른 문이 차가 있는 문이면 "성공"을 기록  
+    if(pick == car) success <- success + 1 
+
+  
+ } 
+
+# 총 시행 중 "성공"의 비율  
+success/n_simul
+
+
+# 바꾸는 경우 
+n_simul <- 1000
+doors <- 3  
+success <- 0 
+
+for (i in 1:n_simul) { #1000번 반복 
+    # 3개의 문 중 차의 위치를 선택
+    car <- sample(doors,1)
+    
+    # 차가 없는 곳에 염소들을 배치 
+    if (car == 1) { 
+        goat <- c(2,3)
+    } else if (car==2) {
+        goat <- c(1,3)
+    } else { 
+        goat <- c(1,2) 
+    } 
+
+    # 참가자가 문을 선택 (고른다) 
+    pick <- sample(doors,1)
+
+    # 참가자가 고르지 않은 문 중 염소가 있는 문을 찾는다.
+    goat_not_picked <- goat[goat !=pick] 
+    
+    # 참가자가 고르지 않은 문 중 염소가 있는 문 하나를 열어준다 
+    if (length(goat_not_picked)>1) { 
+        open <- sample(goat_not_picked, 1) 
+        
+    } else {  
+        open <- goat_not_picked 
+    } 
+
+    # 바꾸어 선택한 문이 차가 있는 문이면 "성공"으로 기록
+    pick <- doors[(doors != pick) & (doors != open)] 
+
+    if (pick == car) success <- success + 1 
+ } 
+
+# 총 시행 중 성공의 비율 
+success/n_simul
+
+# 심슨의 역설
+
+
+
+
+
+
+
+#생일역설- 왜 드물게 보이는 사건은 꼭 일어나는가 
+# 한반에 20명의 학생이 있을 때에 생일이 겹치는 학생이 한명도 없을 확률은 얼마나 될까? 
+# (365-1)/365 * (365-2)/365 * (365-3)/365... * (365-19)/365
+# 결론) 58.9% (생각보다 높다) 
+
+n <- 30 
+result <- 1
+for (i in 1:(n-1)) { 
+    result <- result *(365-i)/365 
+} 
+print(result)
