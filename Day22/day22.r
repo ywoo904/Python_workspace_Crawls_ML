@@ -10,7 +10,6 @@ asekltjhaslektjaset ,
 asekl" 
 
 # 출력: [1] "안녕 친구야 \n오늘도 좋은 하루가 되길 바래. \n밖에 날씨는 어때" 
-
 # 3. 동일하게 "\n" 표현되도록 출력하고 싶다면 cat() 
 str2 
 cat(str2)
